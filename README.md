@@ -2,7 +2,7 @@
 
 ### Exercice 1
 
-Ecrire une entité qui nous permettra d'utiliser un registre (bascule D):
+*Ecrire une entité qui nous permettra d'utiliser un registre (bascule D):*
 
 ~~~vhdl
 entity bascule is
@@ -14,7 +14,7 @@ entity bascule is
 end entity;
 ~~~
 
-J'ai ensuite compilé ce fichier `bascule.vhd` avec la commande:
+Il faut ensuite compiler le fichier `bascule.vhd` à l'aide de la commande bash:
 
 ~~~bash
 ghdl -a bascule.vhd
@@ -24,7 +24,7 @@ ghdl -a bascule.vhd
 
 ### Exercice 2
 
-Ecrire une architecture qui inclut effectivement une bascule D:
+*Ecrire une architecture qui inclut effectivement une bascule D:*
 
 ~~~vhdl
 architecture using_rising_edge of bascule is
@@ -40,7 +40,7 @@ begin
 end using_rising_edge;
 ~~~
 
-J'ai ensuite compilé ce fichier `bascule.vhd` avec la commande:
+Il faut ensuite compiler le fichier `bascule.vhd` à l'aide de la commande bash :
 
 ```bash
 ghdl -a bascule.vhd
@@ -50,18 +50,18 @@ ghdl -a bascule.vhd
 
 ### Exercice 3
 
-Ecrire un testbench qui permet de tester cette bascule:
+*Ecrire un testbench qui permet de tester cette bascule:*
 
-Pour générer le "squelette" du test bench j'ai utilisé le gem ruby **vhdl_td**:
+Pour générer automatiquement le "squelette" du test bench nous pouvons utiliser le gem ruby **vhdl_td**:
 
 ~~~bash
 ghdl -a bascule.vhd
 vhdl_tb bascule.vhd
 ~~~
 
-Apres cela, un fichier `bascule_tb.vhd`a ete cree.
+Apres cela, un fichier `bascule_tb.vhd`a été crée, il réutilise des propriétés de l'entité et de l'architecture de notre bascule D.
 
-Dans ce testbench j'ai cree un stimuli:
+Dans ce testbench il faut ensuite créer un stimuli:
 
 ~~~vhdl
 stim : process
@@ -90,9 +90,10 @@ stim : process
    end process;
 ~~~
 
-Afin de visualiser le signal, nous allons utliser le package `gtkwave`
+Afin de visualiser le signal, nous allons utiliser le wave viewer `GTKWave`
 
-Commandes a executer dans le shell linux: (un script .sh a ete cree pour plus de rapiditee)
+Afin d'automatiser la suite de commande nous allons créer un script.
+Voici les commandes que nous allons automatiser:
 
 ~~~bash
 ghdl -a bascule.vhd
@@ -113,13 +114,15 @@ echo '================================'
 gtkwave bascule.ghw 
 ~~~
 
-Apercu du fichier `bascule.ghw`:
+Aperçu du fichier `bascule.ghw` avec le viewer GTKWave:
 
-![capture](/home/blackarch/Documents/VHDL/vhdl_nico/bascule_d/capture.png)
+![capture](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\bascule_d\capture.png)
 
 ### Exercice 4
 
-Dupliquer et modifier l'entité et l'architecture de manière à rendre ce registre générique, sur N bits:
+*Dupliquer et modifier l'entité et l'architecture de manière à rendre ce registre générique, sur N bits:*
+
+Voici l'entité et l'architecture d'une bascule D générique:
 
 ~~~vhdl
 entity bascule_gen is
@@ -147,7 +150,7 @@ end rtl;
 
 
 
-Testbench:
+Nous créons ensuite un testbench:
 
 ~~~vhdl
 stim : process
@@ -176,19 +179,17 @@ stim : process
 
 
 
-GTKWave:
+GTKWave signal:
 
-![bascule_d_generique](/home/blackarch/Documents/VHDL/vhdl_nico/bascule_d_n_bit/bascule_d_generique.png)
-
-
+![bascule_d_generique](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\bascule_d_n_bit\bascule_d_generique.png)
 
 
 
 ### Exercice 5
 
-Créer un compteur qui permet de compter, lorsqu'on l'autorise, jusqu'à 1000 et qui se remet automatiquement à 0. Tester:
+*Créer un compteur qui permet de compter, lorsqu'on l'autorise, jusqu'à 1000 et qui se remet automatiquement à 0. Tester:*
 
-Entitee et architecture:
+Nous définissons l'entité et l'architecture de notre compteur:
 
 ~~~vhdl
 entity Compteur is
@@ -209,8 +210,8 @@ begin
       q <= (others => '0');
     elsif rising_edge(clk) then
       q <= q + 1;
-      if q = 1000 then
-        q <= (others => '0');
+      if q = 1000 then -- si le compteur arrive à 1000
+        q <= (others => '0'); -- back to zero !
       end if;
       
     end if;
@@ -223,7 +224,7 @@ end bhv;
 
 
 
-Testbench:
+Nous créons ensuite un testbench:
 
 ~~~vhdl
 stim : process
@@ -247,19 +248,19 @@ stim : process
 
 
 
-GTKWave:
+GTKWave signal:
 
-![compteur](/home/blackarch/Documents/VHDL/vhdl_nico/compteur/compteur.png)
+![compteur](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\compteur\compteur.png)
 
 
 
 ### Exercice 6
 
-Créer une architecture qui permet, au choix d'un utilisateur, de réaliser une addition, une multiplication, une soustraction ou l'une des opérations logiques bits-à-dit entre 2 données signées soumises par l'utilisateur. 
+*Créer une architecture qui permet, au choix d'un utilisateur, de réaliser une addition, une multiplication, une soustraction ou l'une des opérations logiques bits-à-dit entre 2 données signées soumises par l'utilisateur.* 
 
-Ce type de circuit s'appelle une UAL (ALU) : unité arithmétique et logique, au coeur du coeur de n'importe quel ordinateur:
+*Ce type de circuit s'appelle une UAL (ALU) : unité arithmétique et logique, au cœur du cœur de n'importe quel ordinateur:*
 
-Entitee et architecture:
+Entité et architecture de notre UAL:
 
 ~~~vhdl
 entity ual is
@@ -301,7 +302,7 @@ end rtl;
 
 
 
-Testbench:
+Nous créons ensuite un testbench:
 
 ~~~vhdl
 stim : process
@@ -311,26 +312,26 @@ stim : process
      wait until reset_n='1';
      wait_cycles(100);
      report "applying stimuli...";
-    a <= "0111";
-    b <= "0011";
+    a <= "0111"; -- a=7
+    b <= "0011"; -- b=3
      wait_cycles(100);
-     report "applying stimuli...";
-   op <= "000";
+     report "applying stimuli..."; 
+   op <= "000"; --operation +
      wait_cycles(100);
-   op <= "001";
+   op <= "001"; --operation -
+     wait_cycles(100); 
+   op <= "010"; --operation *
      wait_cycles(100);
-   op <= "010";
+   op <= "011"; --operation and
      wait_cycles(100);
-   op <= "011";
+   op <= "100"; --operation or
      wait_cycles(100);
-   op <= "100";
+   op <= "101"; --operation xor
      wait_cycles(100);
-   op <= "101";
-     wait_cycles(100);
-   op <= "111";
+   op <= "111"; --operation not
    wait_cycles(100);
-      a <= "0101";
-      b <= "0101";
+      a <= "0101"; -- a=5
+      b <= "0101"; -- b=5
      wait_cycles(100);
      report "applying stimuli...";
    op <= "000";
@@ -355,19 +356,19 @@ stim : process
 
 
 
-GTKWave:
+GTKWave signal:![ual](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\ual\ual.png)
 
-![ual](/home/blackarch/Documents/VHDL/vhdl_nico/ual/ual.png)
+Attention, il ne permet pas l'opération d'entiers signés!
 
 
 
 ### Exercice 7
 
-Créer une mémoire adressable et synthétisable pour des octets, pouvant stocker 128 octets. Réaliser un banc de test qui permet de lire et écrire dans cette mémoire:
+*Créer une mémoire adressable et synthétisable pour des octets, pouvant stocker 128 octets. Réaliser un banc de test qui permet de lire et écrire dans cette mémoire:*
 
 
 
-Entitee et architecture:
+Entité et architecture de notre RAM:
 
 ~~~vhdl
 entity ram is
@@ -465,7 +466,7 @@ stim : process
 
 
 
-GTKWave:
+GTKWave signal:
 
-![ram](/home/blackarch/Documents/VHDL/vhdl_nico/ram/ram.png)
+![ram](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\ram\ram.png)
 
