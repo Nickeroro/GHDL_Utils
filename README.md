@@ -22,6 +22,8 @@ ghdl -a bascule.vhd
 
 
 
+------
+
 ### Exercice 2
 
 *Ecrire une architecture qui inclut effectivement une bascule D:*
@@ -47,6 +49,8 @@ ghdl -a bascule.vhd
 ```
 
 
+
+------
 
 ### Exercice 3
 
@@ -118,6 +122,10 @@ Aperçu du fichier `bascule.ghw` avec le viewer GTKWave:
 
 ![capture](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\bascule_d\capture.png)
 
+
+
+------
+
 ### Exercice 4
 
 *Dupliquer et modifier l'entité et l'architecture de manière à rendre ce registre générique, sur N bits:*
@@ -184,6 +192,8 @@ GTKWave signal:
 ![bascule_d_generique](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\bascule_d_n_bit\bascule_d_generique.png)
 
 
+
+------
 
 ### Exercice 5
 
@@ -253,6 +263,8 @@ GTKWave signal:
 ![compteur](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\compteur\compteur.png)
 
 
+
+------
 
 ### Exercice 6
 
@@ -361,6 +373,8 @@ GTKWave signal:![ual](F:\Downloads\GHDL_Utils-master\GHDL_Utils-master\ual\ual.p
 Attention, il ne permet pas l'opération d'entiers signés!
 
 
+
+------
 
 ### Exercice 7
 
